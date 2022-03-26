@@ -1,0 +1,31 @@
+name: Deploy App
+on: [push]
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: cp package*.json ./build
+      - run: npm run build
+      - run: npm ci --production --prefix ./build
+      - uses: hashicorp/setup-terraform@v1
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: true
