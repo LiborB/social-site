@@ -4,10 +4,10 @@ inputs:
     required: true
 runs:
   using: "composite"
-  defaults:
-    run:
-      working-directory: ${{ inputs.lambda-directory }}
   steps:
     - run: cp package*.json ./build
+      working-directory: ${{ inputs.lambda-directory }}
     - run: npm run build
+      working-directory: ${{ inputs.lambda-directory }}
     - run: npm ci --production --prefix ./build
+      working-directory: ${{ inputs.lambda-directory }}
