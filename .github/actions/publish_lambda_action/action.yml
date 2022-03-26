@@ -1,4 +1,5 @@
 name: 'Deploy lambda'
+shell: "bash"
 inputs:
   lambda-directory:
     required: true
