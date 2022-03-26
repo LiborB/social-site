@@ -1,10 +1,12 @@
 name: 'Deploy lambda'
-shell: "bash"
+
 inputs:
   lambda-directory:
     required: true
 runs:
   using: "composite"
+  defaults:
+    - shell: bash
   steps:
     - run: cp package*.json ./build
       working-directory: ${{ inputs.lambda-directory }}
