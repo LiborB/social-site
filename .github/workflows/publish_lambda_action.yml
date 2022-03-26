@@ -1,0 +1,13 @@
+name: 'Deploy lambda'
+inputs:
+  lambda-directory:
+    required: true
+runs:
+  using: "composite"
+  defaults:
+    run:
+      working-directory: ${{ inputs.lambda-directory }}
+  steps:
+    - run: cp package*.json ./build
+    - run: npm run build
+    - run: npm ci --production --prefix ./build

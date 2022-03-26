@@ -8,24 +8,27 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: cp package*.json ./build
-      - run: npm run build
-      - run: npm ci --production --prefix ./build
+      - uses: ./.github/workflows/publish_lambda_action
+        with:
+          lambda-directory: ./lambdas/account
       - uses: hashicorp/setup-terraform@v1
       - name: Terraform fmt
+        working-directory: ./terraform
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
-
       - name: Terraform Init
+        working-directory: ./terraform
         id: init
         run: terraform init
 
       - name: Terraform Validate
+        working-directory: ./terraform
         id: validate
         run: terraform validate -no-color
 
       - name: Terraform Plan
+        working-directory: ./terraform
         id: plan
         run: terraform plan -no-color
         continue-on-error: true
