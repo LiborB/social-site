@@ -5,12 +5,13 @@ inputs:
     required: true
 runs:
   using: "composite"
-  defaults:
-    - shell: bash
   steps:
     - run: cp package*.json ./build
+      shell: bash
       working-directory: ${{ inputs.lambda-directory }}
     - run: npm run build
+      shell: bash
       working-directory: ${{ inputs.lambda-directory }}
     - run: npm ci --production --prefix ./build
+      shell: bash
       working-directory: ${{ inputs.lambda-directory }}
