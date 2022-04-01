@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
-    "lib": ["ES2021"],
+    "lib": [
+      "ES2021",
+      "DOM"
+    ],
     "module": "commonjs",
     "target": "ES2021",
     "allowSyntheticDefaultImports": true,
     "outDir": "build"
   },
-  "include": ["./"]
+  "include": [
+    "./"
+  ]
 }

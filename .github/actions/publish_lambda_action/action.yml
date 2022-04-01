@@ -6,12 +6,12 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: npm ci --production
+      shell: bash
+      working-directory: ${{ inputs.lambda-directory }}
     - run: npm run build
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
-    - run: cp package*.json ./build
-      shell: bash
-      working-directory: ${{ inputs.lambda-directory }}
-    - run: npm ci --production --prefix ./build
+    - run: cp -r . ./build
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
