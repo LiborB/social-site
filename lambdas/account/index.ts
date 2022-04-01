@@ -7,5 +7,5 @@ app.get("/", (req, res) => {
     return res.status(200).json("Hello World")
 })
 
-module.exports.handler = serverless(app)
+export const handler = serverless(app)
 
