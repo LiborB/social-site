@@ -5,12 +5,9 @@
       "DOM"
     ],
     "module": "commonjs",
-    "target": "ES2021",
+    "target": "ES2020",
     "allowSyntheticDefaultImports": true,
-    "outDir": "build",
-    "types": ["node"]
+    "outDir": "./dist"
   },
-  "include": [
-    "./"
-  ]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
