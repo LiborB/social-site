@@ -3,6 +3,15 @@ data "archive_file" "account_lambda" {
 
   source_dir  = "${path.module}/../lambdas/account/dist"
   output_path = "${path.module}/account_lambda.zip"
+
+  depends_on = [
+    random_string.r
+  ]
+}
+
+resource "random_string" "r" {
+  length  = 16
+  special = false
 }
 
 resource "aws_lambda_function" "account_lambda" {
