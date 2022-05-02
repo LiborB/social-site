@@ -27,6 +27,10 @@ resource "aws_apigatewayv2_stage" "lambda" {
       }
     )
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_apigatewayv2_route" "account_lambda" {
