@@ -12,9 +12,9 @@ runs:
     - run: npm run build
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
-    - run: cp -r node_modules ./build
+    - run: cp -r node_modules ./dist
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
-    - run: cp package*.json ./build
+    - run: cp package*.json ./dist
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
