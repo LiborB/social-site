@@ -1,8 +1,8 @@
 data "archive_file" "account_lambda" {
   type = "zip"
 
-  source_dir  = "../${path.module}/lambdas/account/build"
-  output_path = "../${path.module}/account_lambda.zip"
+  source_dir  = "${path.module}/../lambdas/account/build"
+  output_path = "${path.module}/../account_lambda.zip"
 }
 
 resource "aws_s3_bucket" "account_lambda_bucket" {
