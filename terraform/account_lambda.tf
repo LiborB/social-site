@@ -5,26 +5,10 @@ data "archive_file" "account_lambda" {
   output_path = "${path.module}/account_lambda.zip"
 }
 
-resource "aws_s3_bucket" "account_lambda_bucket" {
-  bucket = "account-lambda"
-
-  force_destroy = true
-}
-
-resource "aws_s3_object" "account_lambda" {
-  bucket = aws_s3_bucket.account_lambda_bucket.id
-
-  key    = "account-lambda.zip"
-  source = data.archive_file.account_lambda.output_path
-
-  etag = filemd5(data.archive_file.account_lambda.output_path)
-}
-
 resource "aws_lambda_function" "account_lambda" {
   function_name = "account-lambda"
 
-  s3_bucket = aws_s3_bucket.account_lambda_bucket.id
-  s3_key    = aws_s3_object.account_lambda.key
+  filename = "account-lambda.zip"
 
   runtime = "nodejs14.x"
   handler = "index.handler"
