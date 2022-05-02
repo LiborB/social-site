@@ -3,7 +3,7 @@ import serverless from "serverless-http"
 
 export const app = express()
 
-app.get("/", (req, res) => {
+app.get("/account", (req, res) => {
     return res.status(200).json("Hello World")
 })
 
