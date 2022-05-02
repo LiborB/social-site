@@ -8,7 +8,7 @@ data "archive_file" "account_lambda" {
 resource "aws_lambda_function" "account_lambda" {
   function_name = "account-lambda"
 
-  filename = "${path.module}/account-lambda.zip"
+  filename = data.archive_file.account_lambda.output_path
 
   runtime = "nodejs14.x"
   handler = "index.handler"
