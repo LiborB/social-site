@@ -3,21 +3,24 @@ data "archive_file" "account_lambda" {
 
   source_dir  = "${path.module}/../lambdas/account/dist"
   output_path = "${path.module}/account_lambda.zip"
-
-  depends_on = [
-    random_string.r
-  ]
 }
 
-resource "random_string" "r" {
-  length  = 16
-  special = false
+resource "aws_s3_bucket" "account_lambda_bucket" {}
+
+resource "aws_s3_object" "account_lambda_bucket" {
+  bucket = aws_s3_bucket.account_lambda_bucket.id
+
+  key    = "account-lambda.zip"
+  source = data.archive_file.account_lambda.output_path
+
+  etag = filemd5(data.archive_file.account_lambda.output_path)
 }
 
 resource "aws_lambda_function" "account_lambda" {
   function_name = "account-lambda"
 
-  filename = data.archive_file.account_lambda.output_path
+  s3_bucket = aws_s3_bucket.account_lambda_bucket.id
+  s3_key    = aws_s3_object.account_lambda_bucket.key
 
   runtime = "nodejs14.x"
   handler = "index.handler"
