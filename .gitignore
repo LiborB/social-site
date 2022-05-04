@@ -103,7 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-lambdas/*/build
+lambdas/*/dist
 lambdas/*/outputs
 
 terraform/.terraform/*
