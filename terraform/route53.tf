@@ -2,7 +2,7 @@ resource "aws_apigatewayv2_domain_name" "lambdas" {
   domain_name = "libor.example.com"
 
   domain_name_configuration {
-    certificate_arn = aws_acm_certificate
+    certificate_arn = aws_acm_certificate.cert.arn
     endpoint_type   = "REGIONAL"
     security_policy = "TLS_1_2"
   }
