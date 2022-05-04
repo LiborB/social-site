@@ -19,7 +19,6 @@ resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
   name          = "v1"
-  auto_deploy   = true
   deployment_id = aws_apigatewayv2_deployment.lambda.id
 
   access_log_settings {
