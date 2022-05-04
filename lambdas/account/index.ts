@@ -1,4 +1,4 @@
-import * as express from "express"
+import express from "express"
 import serverlessExpress from "@vendia/serverless-express"
 
 export const app = express()
