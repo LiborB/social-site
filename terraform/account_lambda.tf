@@ -67,7 +67,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda[count.index].name}"
+  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda.name}"
 
   retention_in_days = 30
 }
@@ -78,6 +78,6 @@ resource "aws_lambda_permission" "api_gw" {
   function_name = aws_lambda_function.account_lambda.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_apigatewayv2_api.lambda[count.index].execution_arn}/*/*/*"
+  source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*/*"
 }
 
