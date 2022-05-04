@@ -7,7 +7,6 @@ data "archive_file" "account_lambda" {
 
 resource "aws_s3_bucket" "account_lambda_bucket" {
   bucket        = "accound-lambda"
-  acl           = "private"
   force_destroy = true
 }
 

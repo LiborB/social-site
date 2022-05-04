@@ -1,14 +1,14 @@
-resource "aws_apigatewayv2_deployment" "lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
-
-  lifecycle {
-    create_before_destroy = true
-  }
-
-  depends_on = [
-    aws_apigatewayv2_route.account_lambda
-  ]
-}
+#resource "aws_apigatewayv2_deployment" "lambda" {
+#  api_id = aws_apigatewayv2_api.lambda.id
+#
+#  lifecycle {
+#    create_before_destroy = true
+#  }
+#
+#  depends_on = [
+#    aws_apigatewayv2_route.account_lambda
+#  ]
+#}
 
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "serverless_lambda_gw"
@@ -19,7 +19,7 @@ resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
   name          = "v1"
-  deployment_id = aws_apigatewayv2_deployment.lambda.id
+  deployment_id = "initial"
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_gw.arn
