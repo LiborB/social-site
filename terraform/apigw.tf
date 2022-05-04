@@ -10,17 +10,15 @@ resource "aws_apigatewayv2_deployment" "lambda" {
   }
 }
 
-data "aws_apigatewayv2_api" "lambda" {
-  api_id = "test"
-}
-
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "serverless_lambda_gw"
   protocol_type = "HTTP"
+
+  count = 1
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
-  api_id = data.aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.lambda.id
 
   name          = "v1"
   deployment_id = aws_apigatewayv2_deployment.lambda.id
