@@ -17,7 +17,7 @@ resource "random_string" "r" {
 resource "aws_lambda_function" "account_lambda" {
   function_name = "account-lambda"
 
-  filename = data.archive_file.account_lambda.output_path
+  filename = "account_lambda.zip"
 
   runtime = "nodejs14.x"
   handler = "index.handler"
