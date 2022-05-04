@@ -51,3 +51,9 @@ resource "aws_apigatewayv2_integration" "account_lambda" {
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
 }
+
+resource "aws_apigatewayv2_api_mapping" "lambda_domain" {
+  api_id      = aws_apigatewayv2_api.lambda.id
+  domain_name = aws_apigatewayv2_domain_name.lambdas.id
+  stage       = aws_apigatewayv2_stage.lambda.id
+}
