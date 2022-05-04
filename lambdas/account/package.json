@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@vendia/serverless-express": "^4.8.0",
+    "aws-lambda": "^1.0.7",
     "express": "^4.17.3"
   }
 }
