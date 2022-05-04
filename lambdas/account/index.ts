@@ -1,5 +1,5 @@
 import * as express from "express"
-import serverless from "serverless-http"
+import serverlessExpress from "@vendia/serverless-express"
 
 export const app = express()
 
@@ -7,5 +7,7 @@ app.get("/account", (req, res) => {
     return res.status(200).json("Hello World")
 })
 
-export const handler = serverless(app) 
+export const handler = serverlessExpress({
+    app: app
+})
 
