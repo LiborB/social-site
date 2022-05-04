@@ -4,6 +4,14 @@ resource "aws_apigatewayv2_deployment" "lambda" {
   depends_on = [
     aws_apigatewayv2_route.account_lambda
   ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+data "aws_apigatewayv2_api" "lambda" {
+  api_id = "test"
 }
 
 resource "aws_apigatewayv2_api" "lambda" {
@@ -12,9 +20,8 @@ resource "aws_apigatewayv2_api" "lambda" {
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = data.aws_apigatewayv2_api.lambda.id
 
-  auto_deploy   = true
   name          = "v1"
   deployment_id = aws_apigatewayv2_deployment.lambda.id
 
@@ -50,10 +57,4 @@ resource "aws_apigatewayv2_integration" "account_lambda" {
   integration_uri    = aws_lambda_function.account_lambda.invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
-}
-
-resource "aws_apigatewayv2_api_mapping" "lambda_domain" {
-  api_id      = aws_apigatewayv2_api.lambda.id
-  domain_name = aws_apigatewayv2_domain_name.lambdas.id
-  stage       = aws_apigatewayv2_stage.lambda.id
 }
