@@ -5,7 +5,11 @@ data "archive_file" "account_lambda" {
   output_path = "${path.module}/account_lambda.zip"
 }
 
-resource "aws_s3_bucket" "account_lambda_bucket" {}
+resource "aws_s3_bucket" "account_lambda_bucket" {
+  bucket        = "accound-lambda"
+  acl           = "private"
+  force_destroy = true
+}
 
 resource "aws_s3_object" "account_lambda_bucket" {
   bucket = aws_s3_bucket.account_lambda_bucket.id
