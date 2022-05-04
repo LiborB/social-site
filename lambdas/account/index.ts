@@ -1,19 +1,22 @@
-import express from "express"
+import express, {Router} from "express"
 import serverlessExpress from "@vendia/serverless-express"
 
 export const app = express()
+const router = Router()
 
-app.get("/account", (req, res) => {
+router.get("/account", (req, res) => {
     return res.status(200).json("Hello World")
 })
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
     return res.status(200).json("wtf is this")
 })
 
-app.get("/v1/account", (req, res) => {
+router.get("/v1/account", (req, res) => {
     return res.status(200).json("v1 account")
 })
+
+app.use("/v1", router)
 
 export const handler = serverlessExpress({
     app: app
