@@ -6,13 +6,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: npm i
+    - run: npm ci
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
     - run: npm run build
-      shell: bash
-      working-directory: ${{ inputs.lambda-directory }}
-    - run: npm ci --production
       shell: bash
       working-directory: ${{ inputs.lambda-directory }}
     - run: cp -r node_modules ./dist
