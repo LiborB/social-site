@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_deployment" "lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.lambda[count.index].id
 
   depends_on = [
     aws_apigatewayv2_route.account_lambda
@@ -18,7 +18,7 @@ resource "aws_apigatewayv2_api" "lambda" {
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.lambda[count.index].id
 
   name          = "v1"
   deployment_id = aws_apigatewayv2_deployment.lambda.id
@@ -43,14 +43,14 @@ resource "aws_apigatewayv2_stage" "lambda" {
 }
 
 resource "aws_apigatewayv2_route" "account_lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.lambda[count.index].id
 
   route_key = "ANY /account"
   target    = "integrations/${aws_apigatewayv2_integration.account_lambda.id}"
 }
 
 resource "aws_apigatewayv2_integration" "account_lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.lambda[count.index].id
 
   integration_uri    = aws_lambda_function.account_lambda.invoke_arn
   integration_type   = "AWS_PROXY"
