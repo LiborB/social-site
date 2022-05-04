@@ -5,8 +5,13 @@ data "archive_file" "account_lambda" {
   output_path = "${path.module}/account_lambda.zip"
 }
 
+resource "random_pet" "bucket_name" {
+  prefix = "lambda-"
+  length = 4
+}
+
 resource "aws_s3_bucket" "account_lambda_bucket" {
-  bucket        = "accound-lambda"
+  bucket        = random_pet.bucket_name.id
   force_destroy = true
 }
 
