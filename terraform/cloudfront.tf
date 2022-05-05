@@ -1,6 +1,6 @@
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
+    domain_name = "social-site"
     origin_id   = aws_s3_bucket.website_bucket.bucket
   }
   enabled             = true
