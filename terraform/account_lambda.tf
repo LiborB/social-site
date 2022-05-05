@@ -2,7 +2,7 @@ data "archive_file" "account_lambda" {
   type = "zip"
 
   source_dir  = "${path.module}/../lambdas/account/dist"
-  output_path = "${path.module}/account_lambda.zip"
+  output_path = "${path.module}/account-lambda.zip"
 }
 
 resource "random_pet" "bucket_name" {

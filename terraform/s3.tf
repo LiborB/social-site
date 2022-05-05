@@ -5,7 +5,6 @@ resource "aws_s3_bucket_acl" "website_bucket_acl" {
 
 resource "aws_s3_bucket" "website_bucket" {
   bucket_prefix = "social-site-"
-  acl           = "public-read"
 }
 
 module "template_files" {
@@ -14,7 +13,7 @@ module "template_files" {
   base_dir = "${path.module}/../client-app/dist/client-app"
 }
 
-resource "aws_s3_bucket_object" "website_bucket_dist" {
+resource "aws_s3_object" "website_bucket_dist" {
   for_each = module.template_files.files
 
   bucket       = aws_s3_bucket.website_bucket.bucket
