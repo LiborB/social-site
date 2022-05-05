@@ -5,6 +5,14 @@ terraform {
       version = "~> 4.12.1"
     }
   }
+
+  cloud {
+    organization = "social-site"
+
+    workspaces {
+      name = "social-site"
+    }
+  }
 }
 
 provider "aws" {
