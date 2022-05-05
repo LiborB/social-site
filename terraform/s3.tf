@@ -1,5 +1,9 @@
+resource "random_id" "website_bucket_name" {
+  byte_length = 10
+}
+
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "social-site-website-bucket-${random_pet.bucket_name.id}"
+  bucket = "social-site-website-bucket-${random_id.website_bucket_name.id}"
   acl    = "public-read"
 }
 
