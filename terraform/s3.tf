@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "website_bucket" {
   bucket        = "social-site-website-bucket"
-  force_destroy = true
   acl           = "public-read"
 }
 
@@ -22,5 +21,12 @@ resource "aws_s3_bucket_website_configuration" "website_bucket" {
 
   error_document {
     key = "error.html"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "website_bucket_versioning" {
+  bucket = aws_s3_bucket.website_bucket.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
