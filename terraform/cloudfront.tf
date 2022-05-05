@@ -1,11 +1,7 @@
-locals {
-  s3_origin_id = "socialsite"
-}
-
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
-    origin_id   = local.s3_origin_id
+    origin_id   = aws_s3_bucket.website_bucket.bucket
   }
   enabled             = true
   is_ipv6_enabled     = true
@@ -14,7 +10,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["HEAD", "GET"]
-    target_origin_id = local.s3_origin_id
+    target_origin_id = aws_s3_bucket.website_bucket.bucket
     forwarded_values {
       query_string = false
       cookies {
