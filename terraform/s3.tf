@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "website-bucket"
+  bucket = "social-site-website-bucket"
 }
 
 resource "aws_s3_object" "website_bucket_dist" {
