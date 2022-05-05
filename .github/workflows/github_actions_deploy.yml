@@ -18,8 +18,10 @@ jobs:
       - uses: ./.github/actions/publish_lambda_action
         with:
           lambda-directory: ./lambdas/account
+      - name: Build frontend
+        working-directory: client-app
+        run: npm run build
       - uses: hashicorp/setup-terraform@v1
-
       - name: Terraform fmt
         working-directory: ./terraform
         id: fmt
