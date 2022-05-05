@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "account_lambda_bucket" {
 }
 
 resource "aws_s3_bucket_object" "account_lambda_bucket" {
-  bucket = aws_s3_bucket.account_lambda_bucket.id
+  bucket = aws_s3_bucket.account_lambda_bucket.bucket
 
   key    = "account-lambda.zip"
   source = data.archive_file.account_lambda.output_path
