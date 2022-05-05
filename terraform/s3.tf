@@ -1,10 +1,8 @@
-resource "random_id" "website_bucket_name" {
-  byte_length = 10
-}
+
 
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "social-site-website-bucket-${random_id.website_bucket_name.id}"
-  acl    = "public-read"
+  bucket_prefix = "social-site-"
+  acl           = "public-read"
 }
 
 module "template_files" {
