@@ -1,5 +1,7 @@
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "social-site-website-bucket-${random_pet.bucket_name.id}"
+  bucket = "social-site-website-bucket"
+  force_destroy = true
+  acl = "public-read"
 }
 
 resource "aws_s3_bucket_object" "website_bucket_dist" {
