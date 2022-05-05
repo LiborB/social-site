@@ -11,11 +11,10 @@ resource "random_pet" "bucket_name" {
 }
 
 resource "aws_s3_bucket" "account_lambda_bucket" {
-  bucket        = random_pet.bucket_name.id
-  force_destroy = true
+  bucket = random_pet.bucket_name.id
 }
 
-data "aws_s3_object" "account_lambda_bucket" {
+resource "aws_s3_object" "account_lambda_bucket" {
   bucket = aws_s3_bucket.account_lambda_bucket.bucket
 
   key    = "account-lambda.zip"
@@ -28,7 +27,7 @@ resource "aws_lambda_function" "account_lambda" {
   function_name = "account-lambda"
 
   s3_bucket = aws_s3_bucket.account_lambda_bucket.bucket
-  s3_key    = data.aws_s3_object.account_lambda_bucket.key
+  s3_key    = aws_s3_object.account_lambda_bucket.key
 
   runtime = "nodejs14.x"
   handler = "index.handler"
