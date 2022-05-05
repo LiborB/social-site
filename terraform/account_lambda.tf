@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "account_lambda_bucket" {
   force_destroy = true
 }
 
-resource "aws_s3_object" "account_lambda_bucket" {
+data "aws_s3_object" "account_lambda_bucket" {
   bucket = aws_s3_bucket.account_lambda_bucket.bucket
 
   key    = "account-lambda.zip"
@@ -27,8 +27,8 @@ resource "aws_s3_object" "account_lambda_bucket" {
 resource "aws_lambda_function" "account_lambda" {
   function_name = "account-lambda"
 
-  s3_bucket = aws_s3_bucket.account_lambda_bucket.id
-  s3_key    = aws_s3_object.account_lambda_bucket.key
+  s3_bucket = aws_s3_bucket.account_lambda_bucket.bucket
+  s3_key    = data.aws_s3_object.account_lambda_bucket.key
 
   runtime = "nodejs14.x"
   handler = "index.handler"
