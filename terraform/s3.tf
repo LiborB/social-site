@@ -1,4 +1,7 @@
-
+resource "aws_s3_bucket_acl " "website_bucket_acl" {
+  bucket = aws_s3_bucket.website_bucket.id
+  acl    = "public-read"
+}
 
 resource "aws_s3_bucket" "website_bucket" {
   bucket_prefix = "social-site-"
