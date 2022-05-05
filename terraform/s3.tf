@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "website_bucket" {
-  bucket        = "social-site-website-bucket"
-  acl           = "public-read"
+  bucket = "social-site-website-bucket"
+  acl    = "public-read"
 }
 
 resource "aws_s3_bucket_object" "website_bucket_dist" {
