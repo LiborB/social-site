@@ -53,6 +53,10 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
 
 data "aws_iam_policy_document" "website_bucket_policy_document" {
   statement {
+    principals {
+      identifiers = ["*"]
+      type        = "*"
+    }
     actions = [
       "s3:GetObject"
     ]
