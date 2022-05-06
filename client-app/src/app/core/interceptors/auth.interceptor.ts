@@ -4,8 +4,8 @@ import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http'
 import {BehaviorSubject, map, Observable, throwError} from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {ACCOUNT_BASE_URL} from "../constants";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
             http.post<{
               token: string,
               refreshToken: string
-            }>(`${ACCOUNT_BASE_URL}/auth`, {
+            }>(`${environment.accountBaseUrl}/auth`, {
               refreshToken: this.jwtHelperService.tokenGetter() ?? ""
             }).subscribe({
               next: ({token, refreshToken}) => {

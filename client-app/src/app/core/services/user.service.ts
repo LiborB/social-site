@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ACCOUNT_BASE_URL} from "../constants";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,6 @@ export class UserService {
   }
 
   getAccountDetails() {
-    return this.httpClient.get<string>(`${ACCOUNT_BASE_URL}`)
+    return this.httpClient.get<string>(`${environment.accountBaseUrl}`)
   }
 }
