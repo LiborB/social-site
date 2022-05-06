@@ -16,7 +16,7 @@ resource "aws_apigatewayv2_api" "lambda" {
   version       = "1"
 
   cors_configuration {
-    allowed_origins = ["*"]
+    allow_origins = ["*"]
     allow_methods   = ["*"]
     allow_headers   = ["*"]
   }
