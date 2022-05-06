@@ -72,7 +72,7 @@ resource "aws_iam_role" "apigw_exec" {
       Principal = {
         Service = "apigateway.amazonaws.com"
       }
-    }
+      }
     ]
   })
 }
