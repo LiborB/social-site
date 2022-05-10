@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
             http.post<{
               token: string,
               refreshToken: string
-            }>(`${environment.accountBaseUrl}/auth`, {
+            }>(`${environment.baseApiUrl}/account/auth`, {
               refreshToken: this.jwtHelperService.tokenGetter() ?? ""
             }).subscribe({
               next: ({token, refreshToken}) => {
