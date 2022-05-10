@@ -12,6 +12,6 @@ export class UserService {
   }
 
   getAccountDetails() {
-    return this.httpClient.get<string>(`${environment.accountBaseUrl}`)
+    return this.httpClient.get<string>(`${environment.baseApiUrl}/account`);
   }
 }
