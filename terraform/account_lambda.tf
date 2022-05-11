@@ -5,6 +5,14 @@ data "archive_file" "account_lambda" {
   output_path = "${path.module}/account-lambda.zip"
 }
 
+data "aws_ssm_parameter" "access_token_secret" {
+  name = "access-token-secret"
+}
+
+data "aws_ssm_parameter" "refresh_token_secret" {
+  name = "refresh-token-secret"
+}
+
 resource "random_pet" "bucket_name" {
   prefix = "lambda-"
   length = 4
@@ -35,6 +43,13 @@ resource "aws_lambda_function" "account_lambda" {
   source_code_hash = data.archive_file.account_lambda.output_base64sha256
 
   role = aws_iam_role.lambda_exec.arn
+
+  environment {
+    variables = {
+      ACCESS_TOKEN_SECRET  = data.aws_ssm_parameter.access_token_secret.value
+      REFRESH_TOKEN_SECRET = data.aws_ssm_parameter.refresh_token_secret.value
+    }
+  }
 }
 
 resource "aws_cloudwatch_log_group" "hello_world" {
