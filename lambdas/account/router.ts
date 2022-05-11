@@ -10,7 +10,7 @@ const authMiddleware = () => expressjwt({
 
 export const router = Router();
 
-router.get("/",(req, res) => {
+router.get("/", authMiddleware(), (req, res) => {
     return res.status(200).json("Hello World")
 })
 
