@@ -10,10 +10,6 @@ const authMiddleware = () => expressjwt({
 
 export const router = Router();
 
-router.get("/",  authMiddleware(),(req, res) => {
-    return res.status(200).json("Hello World")
-})
-
 router.post("/login", (req, res) => {
     const body = LoginRequest.safeParse(req.body)
 

@@ -2,7 +2,8 @@ resource "aws_apigatewayv2_deployment" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
   depends_on = [
-    aws_apigatewayv2_route.account_lambda
+    aws_apigatewayv2_route.account_login,
+    aws_apigatewayv2_route.account_auth,
   ]
 
   lifecycle {
@@ -47,10 +48,17 @@ resource "aws_apigatewayv2_stage" "lambda" {
   }
 }
 
-resource "aws_apigatewayv2_route" "account_lambda" {
+resource "aws_apigatewayv2_route" "account_login" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  route_key = "ANY /account"
+  route_key = "POST /account/login"
+  target    = "integrations/${aws_apigatewayv2_integration.account_lambda.id}"
+}
+
+resource "aws_apigatewayv2_route" "account_auth" {
+  api_id = aws_apigatewayv2_api.lambda.id
+
+  route_key = "POST /account/auth"
   target    = "integrations/${aws_apigatewayv2_integration.account_lambda.id}"
 }
 
