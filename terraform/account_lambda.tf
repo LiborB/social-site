@@ -48,6 +48,8 @@ resource "aws_lambda_function" "account_lambda" {
     variables = {
       ACCESS_TOKEN_SECRET  = data.aws_ssm_parameter.access_token_secret.value
       REFRESH_TOKEN_SECRET = data.aws_ssm_parameter.refresh_token_secret.value
+      DB_USERNAME = data.aws_ssm_parameter.db_username.value
+      DB_PASSWORD = data.aws_ssm_parameter.db_password.value
     }
   }
 }
